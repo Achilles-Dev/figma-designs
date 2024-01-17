@@ -43,3 +43,9 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.account {
+  background: linear-gradient(0deg, rgba(20, 110, 180, 0.1), rgba(20, 110, 180, 0.1)),
+linear-gradient(0deg, #FFFFFF, #FFFFFF);
+
+}

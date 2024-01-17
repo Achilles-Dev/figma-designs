@@ -4,6 +4,7 @@ import PhonePeImage from '../../assets/PhonePe.png'
 import PaytmImage from '../../assets/Paytm.png'
 import CODImage from '../../assets/COD.png'
 import { useState } from 'react'
+import Modal from './MyModal'
 
 const providers = [
   {
@@ -37,6 +38,15 @@ const providers = [
 const Payments1 = () => {
   const [isCODChecked, setIsCODChecked] = useState(false)
   const [isMPMClick, setIsMPMClick] = useState(false)
+  const [isModalOpen, setModalOpen] = useState(false)
+
+  const openModal = () => {
+    setModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setModalOpen(false)
+  }
 
   const handleCODClick = () => {
     setIsCODChecked(!isCODChecked)
@@ -46,10 +56,14 @@ const Payments1 = () => {
     setIsMPMClick(!isMPMClick)
   }
 
+  const handleSetup = (name: string) => {
+    console.log(name)
+  }
+
   return (
     <main className='w-full flex justify-center bg-[#FAFAFA] min-h-[91%] py-[32px]'>
       <div className='flex flex-col gap-[12px] w-[760px]'>
-        <div className='flex flex-col rounded-medium p-[24px] gap-[24px] bg-white box-shadow-[0_2px_6px_0px_#1A181E0A]'>
+        <div className='flex flex-col rounded-lg p-[24px] gap-[24px] bg-white box-shadow-[0_2px_6px_0px_#1A181E0A]'>
           <div className='flex flex-col gap-[2px]'>
             <p className='text-[16px] leading-[24px] font-medium text-[#1A181E]'>
               Payment providers
@@ -73,7 +87,10 @@ const Payments1 = () => {
                       </p>
                     </div>
                     <div className='flex justify-end items-center'>
-                      <button className='px-[16px] py-[8px] rounded border-[1px] border-[#146EB4] text-[#146EB4] text-[14px] font-medium'>
+                      <button
+                        onClick={() => handleSetup(provider.name)}
+                        className='px-[16px] py-[8px] rounded border-[1px] border-[#146EB4] text-[#146EB4] text-[14px] font-medium'
+                      >
                         Set up
                       </button>
                     </div>
@@ -110,7 +127,7 @@ const Payments1 = () => {
             ))}
           </div>
         </div>
-        <div className='flex justify-between gap-[32px] border-b-[1px] box-shadow-[0px_2px_6px_0px_#1A181E0A] bg-white rounded-medium p-[24px]'>
+        <div className='flex justify-between gap-[32px] border-b-[1px] box-shadow-[0px_2px_6px_0px_#1A181E0A] bg-white rounded-lg p-[24px]'>
           <div className='flex flex-col gap-[2px]'>
             <p>Manual payment methods</p>
             <p>
@@ -132,6 +149,22 @@ const Payments1 = () => {
             </div>
           </div>
         </div>
+        <div className='flex justify-end'>
+          <button className='text-[16px] text-white leading-[24px] bg-[#146EB4] font-medium opacity-[40%] px-[24px] py-[8px] rounded'>
+            Finish
+          </button>
+        </div>
+      </div>
+
+      <div className='min-h-screen flex items-center justify-center'>
+        <button
+          className='bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded'
+          onClick={openModal}
+        >
+          Open Modal
+        </button>
+
+        <Modal isOpen={isModalOpen} onClose={closeModal} />
       </div>
     </main>
   )
