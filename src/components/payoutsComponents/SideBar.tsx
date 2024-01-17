@@ -36,78 +36,114 @@ const Sidebar = () => {
           </span>
         </div>
         <div className='flex flex-col gap-[4px]'>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          <a
+            href='/'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={HomeIcon} alt='Home' />
             </span>
             <p>Home</p>
-          </div>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          </a>
+          <a
+            href='/orders'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={OrdersIcon} alt='Orders' />
             </span>
             <p>Orders</p>
-          </div>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          </a>
+          <a
+            href='/products'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={ProductsIcon} alt='Products' />
             </span>
             <p>Products</p>
-          </div>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          </a>
+          <a
+            href='/delivery'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={DeliveryIcon} alt='Delivery' />
             </span>
             <p>Delivery</p>
-          </div>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          </a>
+          <a
+            href='/marketing'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={MarketingIcon} alt='Marketing' />
             </span>
             <p>Marketing</p>
-          </div>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          </a>
+          <a
+            href='/analytics'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={AnalyticsIcon} alt='Analytics' />
             </span>
             <p>Analytics</p>
-          </div>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          </a>
+          <a
+            href='/payments'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={PaymentsIcon} alt='Payments' />
             </span>
             <p>Payments</p>
-          </div>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          </a>
+          <a
+            href='/tools'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={ToolsIcon} alt='Tools' />
             </span>
             <p>Tools</p>
-          </div>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          </a>
+          <a
+            href='/discounts'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={DiscountsIcon} alt='Discounts' />
             </span>
             <p>Discounts</p>
-          </div>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          </a>
+          <a
+            href='/audience'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={AudienceIcon} alt='Audience' />
             </span>
             <p>Audience</p>
-          </div>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          </a>
+          <a
+            href='/appearance'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={AppearanceIcon} alt='Appearance' />
             </span>
             <p>Appearance</p>
-          </div>
-          <div className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'>
+          </a>
+          <a
+            href='/plugins'
+            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+          >
             <span className='flex items-center'>
               <img src={PluginsIcon} alt='Plugins' />
             </span>
             <p>Plugins</p>
-          </div>
+          </a>
         </div>
       </div>
       <div className='flex px-[12px] py-[6px] bg-[#353C53] rounded gap-[10px]'>

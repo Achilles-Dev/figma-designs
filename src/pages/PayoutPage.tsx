@@ -1,7 +1,8 @@
 import React from 'react'
 import Header from '../components/payoutsComponents/Header'
 import Sidebar from '../components/payoutsComponents/SideBar'
-import Payments from '../components/payoutsComponents/Payments'
+// import Payments from '../components/payoutsComponents/Payments'
+import Payments1 from '../components/payoutsComponents/Payments1'
 
 const PayoutPage = () => {
   return (
@@ -9,7 +10,7 @@ const PayoutPage = () => {
       <Sidebar />
       <div className='w-full'>
         <Header />
-        <Payments />
+        <Payments1 />
       </div>
     </div>
   )
