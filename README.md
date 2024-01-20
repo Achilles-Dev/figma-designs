@@ -2,7 +2,7 @@
 
 # Figma Designs
 
-> Description the project.
+> This project seeks to convert Figma templates into basic react applications with static data.
 
 ## Built With
 
@@ -16,36 +16,39 @@
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
+- To get a local copy up and running follow these simple example steps.
 
-To get a local copy up and running follow these simple example steps.
+1. clone the repository to you machine using your terminal:
+   ```
+   git clone https://github.com/Achilles-Dev/figma-designs.git
+   ```
+   ```
+   cd figma-designs
+   ```
+2. Install the npm:
+   ```
+   npm install
+   ```
+3. To run the server use:
+   ```
+   npm start
+   ```
 
 ### Prerequisites
 
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
+- React
+- Terminal
+- Figma
+- TailwindCSS
+- Typescript
 
 ## Authors
 
-👤 **Author1**
+👤 **Solomon Hagan**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
-
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@Achilles-Dev](https://github.com/Achilles-Dev/)
+- Twitter: [@SoloAchilles](https://twitter.com/SoloAchilles/)
+- LinkedIn: [Solomon Hagan](https://www.linkedin.com/in/solomon-hagan/)
 
 ## 🤝 Contributing
 
@@ -59,9 +62,7 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+- Figma template - [Payouts V2](https://www.figma.com/file/1QTpfgcJLng3SEHv3V7Nr4/Payouts-V2---2023?type=design&node-id=0-5723&mode=design&t=oUEIZTYsFPxeskp0-0)
 
 ## 📝 License
 

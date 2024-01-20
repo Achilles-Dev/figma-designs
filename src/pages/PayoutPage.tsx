@@ -4,32 +4,25 @@ import Sidebar from '../components/payoutsComponents/SideBar'
 import Payments from '../components/payoutsComponents/Payments'
 import PaymentProviderSetup from '../components/payoutsComponents/PaymentProviderSetup'
 
-const PayoutPage = () => {
-  const [message, setMessage] = useState('')
-  const [isProviderSetup, setIsProviderSetup] = useState(false)
-
-  useEffect(() => {
-    if (message) {
-      setTimeout(() => {
-        setMessage('')
-      }, 5000)
-    }
-  })
-
+const PayoutPage = ({
+  setMessage,
+  setIsProviderSetup,
+  isProviderSetup,
+}: {
+  setMessage: React.Dispatch<React.SetStateAction<string>>
+  setIsProviderSetup: React.Dispatch<React.SetStateAction<boolean>>
+  isProviderSetup: boolean
+}) => {
   return (
-    <div className='flex'>
-      <Sidebar />
-      <div className='w-full'>
-        <Header message={message} setMessage={setMessage} />
-        {isProviderSetup ? (
-          <Payments />
-        ) : (
-          <PaymentProviderSetup
-            setMessage={setMessage}
-            setIsProviderSetup={setIsProviderSetup}
-          />
-        )}
-      </div>
+    <div>
+      {isProviderSetup ? (
+        <Payments />
+      ) : (
+        <PaymentProviderSetup
+          setMessage={setMessage}
+          setIsProviderSetup={setIsProviderSetup}
+        />
+      )}
     </div>
   )
 }
