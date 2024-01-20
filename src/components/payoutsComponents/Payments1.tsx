@@ -14,30 +14,37 @@ import DinerClubIcon from '../../assets/Diner_Club.svg'
 import PaytmIcon from '../../assets/PaytmPM.svg'
 import AirtelMoneyIcon from '../../assets/Airtel.svg'
 import AmazonPayIcon from '../../assets/Amazon.svg'
+import OptionsIcon from '../../assets/Kebab_Right.svg'
+import DeactivateIcon from '../../assets/Deactivate.svg'
+import RemoveIcon from '../../assets/Remove.svg'
 
 import { useState } from 'react'
 import Modal from './MyModal'
 
 const providers = [
   {
-    name: 'Razorpay',
-    image: RazorpayImage,
-    type: 'button',
-  },
-  {
     name: 'Cashfree Payments',
     image: CashfreeImage,
     type: 'button',
+    status: 'not-setup',
+  },
+  {
+    name: 'Razorpay',
+    image: RazorpayImage,
+    type: 'button',
+    status: 'not-setup',
   },
   {
     name: 'PhonePe Payment Gateway',
     image: PhonePeImage,
     type: 'button',
+    status: 'not-setup',
   },
   {
-    name: 'RazorpPaytm Payment Gateway',
+    name: 'Paytm Payment Gateway',
     image: PaytmImage,
     type: 'button',
+    status: 'not-setup',
   },
   {
     name: 'Cash on delivery',
@@ -102,14 +109,24 @@ const Payments1 = () => {
   const [isPmtModalOpen, setIsPmtModalOpen] = useState(false)
   const [pmtMtdSelect, setPmtMtdSelect] = useState<any>(methodSelect())
   const [setupModalHeading, setSetupModalHeading] = useState<string>('')
-
-  console.log(pmtMtdSelect)
+  const [isSetup, setIsSetup] = useState(false)
+  const [detailsUpdate, setDetailsUpdate] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const [isDeactivateOpen, setIsDeactivateOpen] = useState(false)
+  const [isRemoveOpen, setIsRemoveOpen] = useState(false)
+  const [allowRemove, setAllowRemove] = useState(false)
+  const [activeStatus, setActiveStatus] = useState('Details')
 
   const closeModal = () => {
     if (isPmtModalOpen) {
       setIsPmtModalOpen(false)
-    } else {
+      setDetailsUpdate(false)
+    } else if (isModalOpen) {
       setIsModalOpen(false)
+    } else if (isDeactivateOpen) {
+      setIsDeactivateOpen(false)
+    } else if (isRemoveOpen) {
+      setIsRemoveOpen(false)
     }
   }
 
@@ -140,6 +157,29 @@ const Payments1 = () => {
     })
   }
 
+  const handlePaymentSetup = () => {
+    setIsSetup(true)
+    setIsPmtModalOpen(false)
+    setIsModalOpen(false)
+    setDetailsUpdate(false)
+  }
+
+  const handleDetailsClick = () => {
+    setDetailsUpdate(true)
+    setIsPmtModalOpen(true)
+  }
+
+  const handleSetupUpdate = () => {
+    setIsPmtModalOpen(false)
+    setDetailsUpdate(false)
+    setIsModalOpen(true)
+  }
+
+  const handleDeactivation = () => {
+    setActiveStatus('Activate')
+    setIsDeactivateOpen(false)
+  }
+
   return (
     <main className='w-full flex justify-center bg-[#FAFAFA] min-h-[91%] py-[32px]'>
       <div className='flex flex-col gap-[12px] w-[760px]'>
@@ -162,17 +202,43 @@ const Payments1 = () => {
                   <>
                     <div className='flex gap-[16px] items-center'>
                       <img src={provider.image} alt={provider.name} />
-                      <p className='text-[16px] leading-[24px] font-medium text-[#1A181E]'>
-                        {provider.name}
+                      <p className='flex gap-[8px] text-[16px] leading-[24px] font-medium text-[#1A181E]'>
+                        {provider.name === 'Cashfree Payments' &&
+                        activeStatus === 'Activate' ? (
+                          <>
+                            {provider.name}
+                            <span className='px-[6px] py-[2px] rounded-[3px] bg-[#E6E6E6] text-[12px] leading-[16px] font-medium flex items-center'>
+                              INACTIVE
+                            </span>
+                          </>
+                        ) : (
+                          provider.name
+                        )}
                       </p>
                     </div>
                     <div className='flex justify-end items-center'>
-                      <button
-                        onClick={() => handleSetup(provider.name)}
-                        className='px-[16px] py-[8px] rounded border-[1px] border-[#146EB4] text-[#146EB4] text-[14px] font-medium'
-                      >
-                        Set up
-                      </button>
+                      {provider.name === 'Cashfree Payments' && isSetup ? (
+                        <div className='flex justify-center'>
+                          <button
+                            onClick={handleDetailsClick}
+                            className='border-[1px] border-[#D9D9D9] rounded px-[16px] py-[8px] font-medium text-[14px]'
+                          >
+                            {activeStatus}
+                          </button>
+                          <button
+                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                          >
+                            <img src={OptionsIcon} alt='options' />
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          onClick={() => handleSetup(provider.name)}
+                          className='px-[16px] py-[8px] rounded border-[1px] border-[#146EB4] text-[#146EB4] text-[14px] font-medium'
+                        >
+                          Set up
+                        </button>
+                      )}
                     </div>
                   </>
                 ) : (
@@ -235,10 +301,11 @@ const Payments1 = () => {
           </button>
         </div>
       </div>
+
+      {/* Setup Modal */}
+
       <div className='min-h-screen flex items-center justify-center'>
-        {!isModalOpen ? (
-          ''
-        ) : (
+        {isModalOpen && (
           <Modal>
             <div className='flex flex-col p-[24px] gap-[24px]'>
               <div className='flex flex-col gap-[16px]'>
@@ -312,13 +379,13 @@ const Payments1 = () => {
         )}
       </div>
 
+      {/* Payment methods Modal */}
+
       <div className='min-h-screen flex items-center justify-center'>
-        {!isPmtModalOpen ? (
-          ''
-        ) : (
+        {isPmtModalOpen && (
           <Modal>
             <div className='flex justify-between p-[24px]'>
-              <p>Choose payment methods</p>
+              <p>{detailsUpdate ? 'Update' : 'Choose'} payment methods</p>
               <button>
                 <img
                   onClick={closeModal}
@@ -358,11 +425,17 @@ const Payments1 = () => {
                 </div>
               </div>
               <div className='flex flex-col items-center gap-[8px] border-t-[1px] border-[#E6E6E6] py-[16px]'>
-                <button className='flex px-[24px] py-[8px] rounded bg-[#146EB4] text-white text-[16px] leading-[24px] font-medium'>
-                  Finish setup
+                <button
+                  onClick={handlePaymentSetup}
+                  className='flex px-[24px] py-[8px] rounded bg-[#146EB4] text-white text-[16px] leading-[24px] font-medium'
+                >
+                  {detailsUpdate ? 'Update' : 'Finish setup'}
                 </button>
 
-                <button className='underline text-[16px] leading-[24px] font-medium text-[#4D4D4D]'>
+                <button
+                  onClick={handleSetupUpdate}
+                  className='underline text-[16px] leading-[24px] font-medium text-[#4D4D4D]'
+                >
                   Edit Cashfree details
                 </button>
               </div>
@@ -370,6 +443,114 @@ const Payments1 = () => {
           </Modal>
         )}
       </div>
+
+      {/* Deactivate Modal */}
+      <div className='min-h-screen flex items-center justify-center'>
+        {isDeactivateOpen && (
+          <Modal>
+            <div className='flex flex-col gap-[24px] rounded-lg px-[24px] py-[32px] relative'>
+              <div className='flex flex-col items-center gap-[12px]'>
+                <img src={DeactivateIcon} alt='Exclam' />
+                <div>
+                  <p className='text-[#1A181E] font-medium text-[18px] leading-[26px]'>
+                    Deactivate Cashfree?
+                  </p>
+                  <p className='text-[#4D4D4D] text-[16px] leading-[24px]'>
+                    You won't be able to receive payments via Cashfree anymore,
+                    but you can still activate it later.
+                  </p>
+                </div>
+              </div>
+              <div className='flex justify-center'>
+                <button
+                  onClick={handleDeactivation}
+                  className='text-white bg-[#146EB4] px-[24px] py-[8px] rounded text-[16px] font-medium'
+                >
+                  Yes, deactivate
+                </button>
+              </div>
+              <img
+                onClick={closeModal}
+                className='h-[24px] w-[24px] absolute right-[24px] top-[26px]'
+                src={CloseIcon}
+                alt='Close'
+              />
+            </div>
+          </Modal>
+        )}
+      </div>
+
+      {/* Remove Modal */}
+      <div className='min-h-screen flex items-center justify-center'>
+        {isRemoveOpen && (
+          <Modal>
+            <div className='flex flex-col gap-[24px] rounded-lg px-[24px] py-[32px] relative'>
+              <div className='flex flex-col items-center gap-[12px]'>
+                <img src={RemoveIcon} alt='Exclam' />
+                <div>
+                  <p className='text-[#1A181E] font-medium text-[18px] leading-[26px]'>
+                    Remove Cashfree?
+                  </p>
+                  <p className='text-[#4D4D4D] text-[16px] leading-[24px]'>
+                    You won't be able to receive payments via Cashfree anymore,
+                    and all payment data will be permanently deleted.
+                  </p>
+                </div>
+              </div>
+              <div
+                onClick={() => setAllowRemove(!allowRemove)}
+                className='flex justify-center gap-[12px] text-[16px] leading-[24px]'
+              >
+                <input type='checkbox' checked={allowRemove} />
+                <p>I understand I cannot undo this action.</p>
+              </div>
+              <div className='flex justify-center'>
+                <button
+                  className={`text-white bg-[#146EB4] px-[24px] py-[8px] rounded text-[16px] font-medium ${
+                    allowRemove ? '' : 'opacity-40'
+                  } `}
+                  disabled={!allowRemove}
+                  onClick={() => console.log(allowRemove)}
+                >
+                  Yes, remove
+                </button>
+              </div>
+              <img
+                onClick={closeModal}
+                className='h-[24px] w-[24px] absolute right-[24px] top-[26px]'
+                src={CloseIcon}
+                alt='Close'
+              />
+            </div>
+          </Modal>
+        )}
+      </div>
+
+      {/* Dropdown */}
+      {isDropdownOpen && (
+        <div className='absolute right-5 top-[22%] '>
+          <div className='ml-2 flex flex-col gap-[4px] p-[8px] items-start text-[14px] leading-[20px] box-shadow-[0_4px_12px_0_#1A181E1A] bg-white'>
+            <button
+              onClick={() => {
+                setIsDeactivateOpen(true)
+                setIsDropdownOpen(false)
+              }}
+              className={`px-[8px] py-[4px] ${activeStatus && 'hidden'}`}
+            >
+              Deactivate
+            </button>
+            <button
+              onClick={() => {
+                setIsRemoveOpen(true)
+                setIsDropdownOpen(false)
+              }}
+              className='px-[8px] py-[4px] text-[#E50B20]'
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   )
 }
