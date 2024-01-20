@@ -32,7 +32,11 @@ const Sidebar = () => {
             </div>
           </div>
           <span className='flex items-center justify-center'>
-            <img src={ChevronDownIcon} alt='Down Arrow' />
+            <img
+              className='w-[20px] h-[20px]'
+              src={ChevronDownIcon}
+              alt='Down Arrow'
+            />
           </span>
         </div>
         <div className='flex flex-col gap-[4px]'>
