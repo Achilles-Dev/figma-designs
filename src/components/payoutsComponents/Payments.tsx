@@ -65,7 +65,7 @@ const Payments = () => {
 
   return (
     <main className='flex flex-col gap-[32px] p-[32px] bg-[#FAFAFA] min-h-[91%]'>
-      <div className='flex flex-col gap-[24px]'>
+      <div className='flex flex-col gap-[24px] w-full'>
         <div className='flex justify-between'>
           <p className='text-[20px] leading-[28px]'>Overview</p>
           <button className='flex gap-[16px] border-[1px] border-[#D9D9D9] rounded px-[16px] py-[6px] items-center'>
@@ -77,14 +77,14 @@ const Payments = () => {
             </span>
           </button>
         </div>
-        <div className='flex gap-[20px]'>
-          <div className='flex flex-col gap-[24px] p-[24px] rounded bg-white w-[566px]'>
+        <div className='flex gap-[20px] w-full'>
+          <div className='flex flex-col gap-[24px] p-[24px] rounded bg-white w-1/2'>
             <p className='text-[16px] leading-[24px] text-[#4D4D4D]'>
               Online orders
             </p>
             <p className='text-[32px] leading-[38px] text-[#1A181E]'>231</p>
           </div>
-          <div className='flex flex-col gap-[24px] p-[24px] rounded bg-white w-[566px]'>
+          <div className='flex flex-col gap-[24px] p-[24px] rounded bg-white w-1/2'>
             <p className='text-[16px] leading-[24px] text-[#4D4D4D]'>
               Amount received
             </p>
@@ -124,9 +124,9 @@ const Payments = () => {
             </div>
             <table className='w-full'>
               <thead>
-                <tr className='flex justify-between px-[12px] py-[10px] rounded bg-[#F2F2F2]'>
+                <tr className='flex gap-[12px] justify-between px-[12px] py-[10px] rounded bg-[#F2F2F2]'>
                   {tableHeading.map((rowItem, index) => (
-                    <th key={index} className='w-[246px]'>
+                    <th key={index} className='w-full'>
                       <p
                         className={`text-[14px] leading-[20px] text-[#4D4D4D] ${
                           index < 2 ? 'text-start' : 'text-end'
@@ -144,10 +144,10 @@ const Payments = () => {
                     key={index}
                     className='flex justify-between px-[12px] py-[14px] border-b-[1px]'
                   >
-                    <td className='w-[246px]'>{item.orderId}</td>
-                    <td className='w-[246px]'>{item.orderdate}</td>
-                    <td className='w-[246px] text-end'>{item.orderAmount}</td>
-                    <td className='w-[246px] text-end'>
+                    <td className='w-full'>{item.orderId}</td>
+                    <td className='w-full'>{item.orderdate}</td>
+                    <td className='w-full text-end'>{item.orderAmount}</td>
+                    <td className='w-full text-end'>
                       {item.orderAmount.charAt(0) +
                         Math.ceil(
                           parseFloat(
