@@ -41,7 +41,7 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={HomeIcon} alt='Home' />
+              <img className='w-[20px] h-[20px]' src={HomeIcon} alt='Home' />
             </span>
             <p>Home</p>
           </a>
@@ -50,7 +50,11 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={OrdersIcon} alt='Orders' />
+              <img
+                className='w-[20px] h-[20px]'
+                src={OrdersIcon}
+                alt='Orders'
+              />
             </span>
             <p>Orders</p>
           </a>
@@ -59,7 +63,11 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={ProductsIcon} alt='Products' />
+              <img
+                className='w-[20px] h-[20px]'
+                src={ProductsIcon}
+                alt='Products'
+              />
             </span>
             <p>Products</p>
           </a>
@@ -68,7 +76,11 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={DeliveryIcon} alt='Delivery' />
+              <img
+                className='w-[20px] h-[20px]'
+                src={DeliveryIcon}
+                alt='Delivery'
+              />
             </span>
             <p>Delivery</p>
           </a>
@@ -77,7 +89,11 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={MarketingIcon} alt='Marketing' />
+              <img
+                className='w-[20px] h-[20px]'
+                src={MarketingIcon}
+                alt='Marketing'
+              />
             </span>
             <p>Marketing</p>
           </a>
@@ -86,7 +102,11 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={AnalyticsIcon} alt='Analytics' />
+              <img
+                className='w-[20px] h-[20px]'
+                src={AnalyticsIcon}
+                alt='Analytics'
+              />
             </span>
             <p>Analytics</p>
           </a>
@@ -95,7 +115,11 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={PaymentsIcon} alt='Payments' />
+              <img
+                className='w-[20px] h-[20px]'
+                src={PaymentsIcon}
+                alt='Payments'
+              />
             </span>
             <p>Payments</p>
           </a>
@@ -104,7 +128,7 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={ToolsIcon} alt='Tools' />
+              <img className='w-[20px] h-[20px]' src={ToolsIcon} alt='Tools' />
             </span>
             <p>Tools</p>
           </a>
@@ -113,7 +137,11 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={DiscountsIcon} alt='Discounts' />
+              <img
+                className='w-[20px] h-[20px]'
+                src={DiscountsIcon}
+                alt='Discounts'
+              />
             </span>
             <p>Discounts</p>
           </a>
@@ -122,7 +150,11 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={AudienceIcon} alt='Audience' />
+              <img
+                className='w-[20px] h-[20px]'
+                src={AudienceIcon}
+                alt='Audience'
+              />
             </span>
             <p>Audience</p>
           </a>
@@ -131,7 +163,11 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={AppearanceIcon} alt='Appearance' />
+              <img
+                className='w-[20px] h-[20px]'
+                src={AppearanceIcon}
+                alt='Appearance'
+              />
             </span>
             <p>Appearance</p>
           </a>
@@ -140,7 +176,11 @@ const Sidebar = () => {
             className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
           >
             <span className='flex items-center'>
-              <img src={PluginsIcon} alt='Plugins' />
+              <img
+                className='w-[20px] h-[20px]'
+                src={PluginsIcon}
+                alt='Plugins'
+              />
             </span>
             <p>Plugins</p>
           </a>
@@ -148,7 +188,7 @@ const Sidebar = () => {
       </div>
       <div className='flex px-[12px] py-[6px] bg-[#353C53] rounded gap-[10px]'>
         <span className='flex items-center'>
-          <img src={FrameIcon} alt='Frame' />
+          <img className='w-[36px] h-[36px]' src={FrameIcon} alt='Frame' />
         </span>
         <div className='flex flex-col gap-[2px]'>
           <p className='opacity-[80%] text-[13px] leading-[16px]'>
