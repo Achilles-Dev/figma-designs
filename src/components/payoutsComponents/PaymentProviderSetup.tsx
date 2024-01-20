@@ -97,15 +97,23 @@ const methodSelect = () => {
   let items = {} as any
   paymentMethods.forEach((pmt) => {
     let name = pmt.name
-    items[name] = false
+    items[name] = true
   })
   return items
 }
 
-const Payments1 = () => {
+const PaymentProviderSetup = ({
+  setMessage,
+  setIsProviderSetup,
+}: {
+  setMessage: React.Dispatch<React.SetStateAction<string>>
+  setIsProviderSetup: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
   const [isCODChecked, setIsCODChecked] = useState(false)
   const [isMPMClick, setIsMPMClick] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [ApiId, setApiID] = useState('')
+  const [secretKey, setSecretKey] = useState('')
   const [isPmtModalOpen, setIsPmtModalOpen] = useState(false)
   const [pmtMtdSelect, setPmtMtdSelect] = useState<any>(methodSelect())
   const [setupModalHeading, setSetupModalHeading] = useState<string>('')
@@ -123,6 +131,8 @@ const Payments1 = () => {
       setDetailsUpdate(false)
     } else if (isModalOpen) {
       setIsModalOpen(false)
+      setApiID('')
+      setSecretKey('')
     } else if (isDeactivateOpen) {
       setIsDeactivateOpen(false)
     } else if (isRemoveOpen) {
@@ -144,6 +154,7 @@ const Payments1 = () => {
   }
 
   const handleContinue = () => {
+    console.log(secretKey, ApiId)
     setIsPmtModalOpen(true)
   }
 
@@ -162,11 +173,16 @@ const Payments1 = () => {
     setIsPmtModalOpen(false)
     setIsModalOpen(false)
     setDetailsUpdate(false)
+    setMessage('Cashfree Payments set up successfully!')
   }
 
   const handleDetailsClick = () => {
-    setDetailsUpdate(true)
-    setIsPmtModalOpen(true)
+    if (activeStatus === 'Activate') {
+      setActiveStatus('Details')
+    } else {
+      setDetailsUpdate(true)
+      setIsPmtModalOpen(true)
+    }
   }
 
   const handleSetupUpdate = () => {
@@ -178,125 +194,138 @@ const Payments1 = () => {
   const handleDeactivation = () => {
     setActiveStatus('Activate')
     setIsDeactivateOpen(false)
+    setMessage('Cashfree Payments deactivated successfully!')
   }
 
   return (
     <main className='w-full flex justify-center bg-[#FAFAFA] min-h-[91%] py-[32px]'>
-      <div className='flex flex-col gap-[12px] w-[760px]'>
-        <div className='flex flex-col rounded-lg p-[24px] gap-[24px] bg-white box-shadow-[0_2px_6px_0px_#1A181E0A]'>
-          <div className='flex flex-col gap-[2px]'>
-            <p className='text-[16px] leading-[24px] font-medium text-[#1A181E]'>
-              Payment providers
-            </p>
-            <span className='text-[14px] leading-[20px] font-medium text-[#808080]'>
-              Set up payment providers to accept payments from your customers
-            </span>
-          </div>
-          <div className='flex flex-col gap-[16px]'>
-            {providers.map((provider, index) => (
-              <div
-                key={index}
-                className='flex gap-[24px] justify-between rounded'
-              >
-                {provider.type === 'button' ? (
-                  <>
-                    <div className='flex gap-[16px] items-center'>
-                      <img src={provider.image} alt={provider.name} />
-                      <p className='flex gap-[8px] text-[16px] leading-[24px] font-medium text-[#1A181E]'>
-                        {provider.name === 'Cashfree Payments' &&
-                        activeStatus === 'Activate' ? (
-                          <>
-                            {provider.name}
-                            <span className='px-[6px] py-[2px] rounded-[3px] bg-[#E6E6E6] text-[12px] leading-[16px] font-medium flex items-center'>
-                              INACTIVE
-                            </span>
-                          </>
+      <div className='flex flex-col gap-[32px] w-[760px]'>
+        <div className='flex flex-col gap-[24px]'>
+          <div className='flex flex-col rounded-lg p-[24px] gap-[24px] bg-white box-shadow-[0_2px_6px_0px_#1A181E0A]'>
+            <div className='flex flex-col gap-[2px]'>
+              <p className='text-[16px] leading-[24px] font-medium text-[#1A181E]'>
+                Payment providers
+              </p>
+              <span className='text-[14px] leading-[20px] font-medium text-[#808080]'>
+                Set up payment providers to accept payments from your customers
+              </span>
+            </div>
+            <div className='flex flex-col gap-[16px]'>
+              {providers.map((provider, index) => (
+                <div
+                  key={index}
+                  className='flex gap-[24px] justify-between rounded'
+                >
+                  {provider.type === 'button' ? (
+                    <>
+                      <div className='flex gap-[16px] items-center'>
+                        <img src={provider.image} alt={provider.name} />
+                        <p className='flex gap-[8px] text-[16px] leading-[24px] font-medium text-[#1A181E]'>
+                          {provider.name === 'Cashfree Payments' &&
+                          activeStatus === 'Activate' ? (
+                            <>
+                              {provider.name}
+                              <span className='px-[6px] py-[2px] rounded-[3px] bg-[#E6E6E6] text-[12px] leading-[16px] font-medium flex items-center'>
+                                INACTIVE
+                              </span>
+                            </>
+                          ) : (
+                            provider.name
+                          )}
+                        </p>
+                      </div>
+                      <div className='flex justify-end items-center'>
+                        {provider.name === 'Cashfree Payments' && isSetup ? (
+                          <div className='flex justify-center'>
+                            <button
+                              onClick={handleDetailsClick}
+                              className='border-[1px] border-[#D9D9D9] rounded px-[16px] py-[8px] font-medium text-[14px]'
+                            >
+                              {activeStatus}
+                            </button>
+                            <button
+                              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                            >
+                              <img src={OptionsIcon} alt='options' />
+                            </button>
+                          </div>
                         ) : (
-                          provider.name
+                          <button
+                            onClick={() => handleSetup(provider.name)}
+                            className='px-[16px] py-[8px] rounded border-[1px] border-[#146EB4] text-[#146EB4] text-[14px] font-medium'
+                          >
+                            Set up
+                          </button>
                         )}
-                      </p>
-                    </div>
-                    <div className='flex justify-end items-center'>
-                      {provider.name === 'Cashfree Payments' && isSetup ? (
-                        <div className='flex justify-center'>
-                          <button
-                            onClick={handleDetailsClick}
-                            className='border-[1px] border-[#D9D9D9] rounded px-[16px] py-[8px] font-medium text-[14px]'
-                          >
-                            {activeStatus}
-                          </button>
-                          <button
-                            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                          >
-                            <img src={OptionsIcon} alt='options' />
-                          </button>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className='flex gap-[16px] items-center'>
+                        <img src={provider.image} alt={provider.name} />
+                        <div className='flex flex-col gap-[2px]'>
+                          <p className='text-[16px] leading-[24px] font-medium text-[#1A181E]'>
+                            {provider.name}
+                          </p>
+                          <p className='text-[14px] leading-[20px] text-[#4D4D4D]'>
+                            {provider.details}
+                          </p>
                         </div>
-                      ) : (
-                        <button
-                          onClick={() => handleSetup(provider.name)}
-                          className='px-[16px] py-[8px] rounded border-[1px] border-[#146EB4] text-[#146EB4] text-[14px] font-medium'
+                      </div>
+                      <div className='flex justify-end items-center'>
+                        <div
+                          className='w-[36px] h-[24px] relative inline-block'
+                          onClick={handleCODClick}
                         >
-                          Set up
-                        </button>
-                      )}
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className='flex gap-[16px] items-center'>
-                      <img src={provider.image} alt={provider.name} />
-                      <div className='flex flex-col gap-[2px]'>
-                        <p className='text-[16px] leading-[24px] font-medium text-[#1A181E]'>
-                          {provider.name}
-                        </p>
-                        <p className='text-[14px] leading-[20px] text-[#4D4D4D]'>
-                          {provider.details}
-                        </p>
+                          <input
+                            className='opacity-0 w-[0px] h-[0px]'
+                            type='checkbox'
+                            checked={isCODChecked}
+                            readOnly
+                          />
+                          <span className='slider round'></span>
+                        </div>
                       </div>
-                    </div>
-                    <div className='flex justify-end items-center'>
-                      <div
-                        className='w-[36px] h-[24px] relative inline-block'
-                        onClick={handleCODClick}
-                      >
-                        <input
-                          className='opacity-0 w-[0px] h-[0px]'
-                          type='checkbox'
-                          checked={isCODChecked}
-                        />
-                        <span className='slider round'></span>
-                      </div>
-                    </div>
-                  </>
-                )}
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className='flex justify-between gap-[32px] border-b-[1px] box-shadow-[0px_2px_6px_0px_#1A181E0A] bg-white rounded-lg p-[24px]'>
+            <div className='flex flex-col gap-[2px]'>
+              <p className='font-medium text-[16px] leading-[24px] text-[#1A181E]'>
+                Manual payment methods
+              </p>
+              <p className='text-[14px] leading-[20px] text-[#808080]'>
+                Payments that are made outside online store. Allows you to
+                accept cash, check or other custom forms of payment.
+              </p>
+            </div>
+            <div>
+              <div
+                className='w-[36px] h-[24px] relative inline-block'
+                onClick={handleMPMClick}
+              >
+                <input
+                  className='opacity-0 w-[0px] h-[0px]'
+                  type='checkbox'
+                  checked={isMPMClick}
+                  readOnly
+                />
+                <span className='slider round'></span>
               </div>
-            ))}
-          </div>
-        </div>
-        <div className='flex justify-between gap-[32px] border-b-[1px] box-shadow-[0px_2px_6px_0px_#1A181E0A] bg-white rounded-lg p-[24px]'>
-          <div className='flex flex-col gap-[2px]'>
-            <p>Manual payment methods</p>
-            <p>
-              Payments that are made outside online store. Allows you to accept
-              cash, check or other custom forms of payment.
-            </p>
-          </div>
-          <div>
-            <div
-              className='w-[36px] h-[24px] relative inline-block'
-              onClick={handleMPMClick}
-            >
-              <input
-                className='opacity-0 w-[0px] h-[0px]'
-                type='checkbox'
-                checked={isMPMClick}
-              />
-              <span className='slider round'></span>
             </div>
           </div>
         </div>
         <div className='flex justify-end'>
-          <button className='text-[16px] text-white leading-[24px] bg-[#146EB4] font-medium opacity-[40%] px-[24px] py-[8px] rounded'>
+          <button
+            className={`text-[16px] text-white leading-[24px] bg-[#146EB4] font-medium ${
+              (!isSetup || activeStatus === 'Activate') && 'opacity-[40%]'
+            } px-[24px] py-[8px] rounded`}
+            onClick={() => setIsProviderSetup(true)}
+            disabled={!isSetup || activeStatus === 'Activate' ? true : false}
+          >
             Finish
           </button>
         </div>
@@ -351,6 +380,7 @@ const Payments1 = () => {
                       API ID <span className='text-[#E50B20]'>*</span>
                     </p>
                     <input
+                      onChange={(e) => setApiID(e.target.value)}
                       className='border-[1px] w-full rounded border-[#D9D9D9] py-[12px] px-[16px] placeholder:text-[16px] placeholder:leading-[24px] placeholder:text-[#999999]'
                       placeholder='Enter merchant id'
                     />
@@ -360,6 +390,7 @@ const Payments1 = () => {
                       Secrey Key <span className='text-[#E50B20]'>*</span>
                     </p>
                     <input
+                      onChange={(e) => setSecretKey(e.target.value)}
                       className='border-[1px] w-full rounded border-[#D9D9D9] py-[12px] px-[16px] placeholder:text-[16px] placeholder:leading-[24px] placeholder:text-[#999999]'
                       placeholder='Enter merchant id'
                     />
@@ -369,7 +400,10 @@ const Payments1 = () => {
               <div className='flex justify-center'>
                 <button
                   onClick={handleContinue}
-                  className='px-[24px] py-[8px] bg-[#146EB4] opacity-40 rounded text-white'
+                  className={`px-[24px] py-[8px] bg-[#146EB4] ${
+                    (ApiId === '' || secretKey === '') && 'opacity-40'
+                  } rounded text-white`}
+                  disabled={ApiId === '' || secretKey === '' ? true : false}
                 >
                   Continue
                 </button>
@@ -417,6 +451,7 @@ const Payments1 = () => {
                           className='opacity-0 w-[0px] h-[0px]'
                           type='checkbox'
                           checked={pmtMtdSelect[payMeth.name]}
+                          readOnly
                         />
                         <span className='slider round'></span>
                       </div>
@@ -501,7 +536,7 @@ const Payments1 = () => {
                 onClick={() => setAllowRemove(!allowRemove)}
                 className='flex justify-center gap-[12px] text-[16px] leading-[24px]'
               >
-                <input type='checkbox' checked={allowRemove} />
+                <input type='checkbox' checked={allowRemove} readOnly />
                 <p>I understand I cannot undo this action.</p>
               </div>
               <div className='flex justify-center'>
@@ -535,7 +570,9 @@ const Payments1 = () => {
                 setIsDeactivateOpen(true)
                 setIsDropdownOpen(false)
               }}
-              className={`px-[8px] py-[4px] ${activeStatus && 'hidden'}`}
+              className={`px-[8px] py-[4px] ${
+                activeStatus === 'Activate' && 'hidden'
+              }`}
             >
               Deactivate
             </button>
@@ -555,4 +592,4 @@ const Payments1 = () => {
   )
 }
 
-export default Payments1
+export default PaymentProviderSetup
