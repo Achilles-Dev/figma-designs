@@ -16,7 +16,7 @@ function App() {
         setMessage('')
       }, 5000)
     }
-  })
+  }, [message])
 
   return (
     <div className='flex flex-col h-screen'>

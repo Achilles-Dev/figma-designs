@@ -21,9 +21,7 @@ const Header = ({
       <div className='flex gap-[16px] items-center'>
         <p className='text-[15px] leading-[22px]'>Payments</p>
         <span className='flex gap-[6px] text-[12px] leading-[16px] items-center'>
-          <span className='w-[16px] h-[16px]'>
-            <img src={HelpIcon} alt='Help' />
-          </span>
+          <img className='w-[14px] h-[14px]' src={HelpIcon} alt='Help' />
           <span className='flex items-center'>How it works</span>
         </span>
       </div>
@@ -34,7 +32,7 @@ const Header = ({
             placeholder='Search features, tutorials, etc.'
           />
           <span className='absolute inset-y-0 left-0 flex items-center pl-[16px]'>
-            <img src={SearchIcon} alt='Search' />
+            <img className='w-[16px] h-[16px]' src={SearchIcon} alt='Search' />
           </span>
         </div>
       ) : (
@@ -56,10 +54,14 @@ const Header = ({
 
       <div className='flex items-center gap-[8px]'>
         <span className='w-[40px] h-[40px] flex items-center justify-center bg-[#E6E6E6] rounded-full'>
-          <img src={VectorIcon} alt='Vector' />
+          <img className='w-[20px] h-[20px]' src={VectorIcon} alt='Vector' />
         </span>
         <span className='w-[40px] h-[40px] flex items-center justify-center bg-[#E6E6E6] rounded-full'>
-          <img src={PolygonIcon} alt='Arrow Down' />
+          <img
+            className='w-[20px] h-[20px]'
+            src={PolygonIcon}
+            alt='Arrow Down'
+          />
         </span>
       </div>
     </nav>

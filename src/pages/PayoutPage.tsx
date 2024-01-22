@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import Header from '../components/payoutsComponents/Header'
-import Sidebar from '../components/payoutsComponents/SideBar'
+import React from 'react'
 import Payments from '../components/payoutsComponents/Payments'
 import PaymentProviderSetup from '../components/payoutsComponents/PaymentProviderSetup'
 
