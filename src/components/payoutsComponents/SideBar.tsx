@@ -14,8 +14,10 @@ import AudienceIcon from '../../assets/Audience.svg'
 import AppearanceIcon from '../../assets/Appearance.svg'
 import PluginsIcon from '../../assets/Plugins.svg'
 import FrameIcon from '../../assets/Frame.svg'
+import { useLocation } from 'react-router-dom'
 
 const Sidebar = () => {
+  const { pathname } = useLocation()
   return (
     <aside className='flex flex-col justify-between w-[224px] bg-[#1E2640] px-[10px] py-[16px] min-h-screen text-white'>
       <div className='flex flex-col gap-[16px]'>
@@ -42,7 +44,9 @@ const Sidebar = () => {
         <div className='flex flex-col gap-[4px]'>
           <a
             href='/'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img className='w-[20px] h-[20px]' src={HomeIcon} alt='Home' />
@@ -51,7 +55,9 @@ const Sidebar = () => {
           </a>
           <a
             href='/orders'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/orders' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img
@@ -64,7 +70,9 @@ const Sidebar = () => {
           </a>
           <a
             href='/products'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/products' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img
@@ -77,7 +85,9 @@ const Sidebar = () => {
           </a>
           <a
             href='/delivery'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/delivery' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img
@@ -90,7 +100,9 @@ const Sidebar = () => {
           </a>
           <a
             href='/marketing'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/marketing' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img
@@ -103,7 +115,9 @@ const Sidebar = () => {
           </a>
           <a
             href='/analytics'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/analytics' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img
@@ -116,7 +130,9 @@ const Sidebar = () => {
           </a>
           <a
             href='/payments'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/payments' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img
@@ -129,7 +145,9 @@ const Sidebar = () => {
           </a>
           <a
             href='/tools'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/tools' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img className='w-[20px] h-[20px]' src={ToolsIcon} alt='Tools' />
@@ -138,7 +156,9 @@ const Sidebar = () => {
           </a>
           <a
             href='/discounts'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/discounts' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img
@@ -151,7 +171,9 @@ const Sidebar = () => {
           </a>
           <a
             href='/audience'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/audience' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img
@@ -164,7 +186,9 @@ const Sidebar = () => {
           </a>
           <a
             href='/appearance'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/appearance' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img
@@ -177,7 +201,9 @@ const Sidebar = () => {
           </a>
           <a
             href='/plugins'
-            className='flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%]'
+            className={`flex gap-[12px] rounded px-[16px] py-[8px] opacity-[80%] ${
+              pathname === '/plugins' && 'bg-[#FFFFFF1A]'
+            } `}
           >
             <span className='flex items-center'>
               <img

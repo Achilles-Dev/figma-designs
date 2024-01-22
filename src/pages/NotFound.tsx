@@ -7,7 +7,7 @@ const NotFound = () => {
           Click the button below to view the Payments page
           <a
             href='/payments'
-            className='flex justify-center w-fit items-center p-2 px-4 place-self-center text-white bg-blue-400 rounded-md text-[16px]'
+            className='flex justify-center w-fit items-center p-2 px-4 place-self-center text-white bg-blue-600 rounded-md text-[16px]'
           >
             Payments
           </a>
